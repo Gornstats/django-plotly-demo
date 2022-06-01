@@ -2,6 +2,12 @@
 
 {% block content %}
 
-    {{ chart|safe }}
+<form method="GET" action="{% url 'chart' %}">
+    {{ form.as_p }}
+
+    <button>Update</button>
+</form>
+
+{{ chart|safe }}
     
 {% endblock content %}
