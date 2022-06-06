@@ -2,13 +2,13 @@
 
 {% block content %}
 
-    <form hx-get="{% url 'chart' %}" hx-target="#chart" hx-swap="outerHTML">
+    <form hx-get="{% url 'chart_update' %}" hx-target="#chart" hx-swap="innerHTML">
         {{ form.as_p }}
         <button>Update</button>
     </form>
 
     <div id="chart">
-    {{ chart|safe }}
+    {% include "core/chart_partial.html" %}
     </div>
 
 {% endblock content %}
