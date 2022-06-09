@@ -59,3 +59,6 @@ def chart_update(request):
     context = {'chart': chart}
     
     return render(request, 'core/chart_partial.html', context)
+
+def yearly_avg_co2(request):
+    pass
