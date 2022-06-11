@@ -67,7 +67,7 @@ def yearly_avg_co2(request):
     x = averages.values_list('date__year', flat=True)
     y = averages.values_list('avg', flat=True) 
     
-    fig = px.bar(x=x, y=y)
+    fig = px.bar(x=x, y=y, labels={'x': 'Year', 'y': 'CO2 PPM'})
     fig.update_layout(title_text='Average CO2 Emissions per Year')
     
     chart = fig.to_html()
