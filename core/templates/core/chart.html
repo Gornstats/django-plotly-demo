@@ -3,8 +3,10 @@
 {% block content %}
 
     <form hx-get="{% url 'chart_update' %}" hx-target="#chart" hx-swap="innerHTML">
+        <h2>Update Chart</h2>
         {{ form.as_p }}
-        <button>Update</button>
+        <input type="submit" name="btn" value="Line Chart">
+        <input type="submit" name="btn" value="Bar Chart">
     </form>
 
     <div id="chart">

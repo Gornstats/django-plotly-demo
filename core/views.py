@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Avg
 import plotly.express as px
 
@@ -34,6 +34,10 @@ def chart(request):
     return render(request, 'core/chart.html', context)
 
 def chart_update(request):
+    chartType = request.GET.get('btn')
+    if 'Bar' in chartType:
+        return redirect('bar')
+    
     co2 = CO2.objects.all()
     start = request.GET.get('start')
     end = request.GET.get('end')
@@ -77,4 +81,4 @@ def yearly_avg_co2(request):
     chart = fig.to_html()
     context = {'chart': chart}
     
-    return render(request, 'core/chart.html', context)
+    return render(request, 'core/chart_partial.html', context)
