@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Avg
 import plotly.express as px
 
 from core.models import CO2
@@ -61,4 +62,15 @@ def chart_update(request):
     return render(request, 'core/chart_partial.html', context)
 
 def yearly_avg_co2(request):
-    pass
+    # calculate average CO2 for each year in dataset
+    averages = CO2.objects.values('date__year').annotate(avg=Avg('average'))
+    x = averages.values_list('date__year', flat=True)
+    y = averages.values_list('avg', flat=True) 
+    
+    fig = px.bar(x=x, y=y)
+    fig.update_layout(title_text='Average CO2 Emissions per Year')
+    
+    chart = fig.to_html()
+    context = {'chart': chart}
+    
+    return render(request, 'core/chart.html', context)
